@@ -1,0 +1,31 @@
+_repo: Memoirs-of-Marguerite-de-Valois-Queen-of-Navarre---Volume-1_3838
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Marguerite, Queen, consort of Henry IV, King of France
+    alias: Valois, Marguerite de
+    birthdate: 1553
+    deathdate: 1615
+    gutenberg_agent_id: '1328'
+    url: http://www.gutenberg.org/2009/agents/1328
+    wikipedia: http://en.wikipedia.org/wiki/Marguerite_de_Valois
+description: ''
+gutenberg_issued: '2004-12-02'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '3838'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcsh 'Queens -- France -- Biography'
+- !lcc 'DC'
+- !lcsh 'Marguerite, Queen, consort of Henry IV, King of France, 1553-1615'
+- !lcsh 'France -- History -- Henry IV, 1589-1610'
+- !lcsh 'France -- Court and courtiers'
+- !lcsh 'Huguenots -- History -- 16th century'
+- !lcsh 'Valois, House of'
+- GITenberg
+title: Memoirs of Marguerite de Valois, Queen of Navarre — Volume 1
+url: http://www.gutenberg.org/ebooks/3838
