@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: 45Z2gP1/W1KSe591gnd7CjGCVKYSgxwlHY7HKm5RVoMq72exEDJF+GcEweFZO+J1IcPDpFA3mC/0n0dm62zQeHETd65pWntzYBgg9XkAzMsLoDCOoYVXjHGNBRw5jAyViACtbbiCH7Fk+ytNicvwg5UXjGNt3TbDBfGYHnHEUIG+WIiWYIgmrLdt1q+R+cQOMP7PBw5MqZoNlDeOefj958WjTV7iZrhXe4cP0991gIYKfXZjJQL4VPUdACv9FNsaYqkE2lwnXh45xMbeRaAnss/KuXO3uQ6LmffAw6cj2XEGXD/CCKEsvuOHda8VrZoHbeCiEG/LRd956XFKVN3aQM2eT3/N04KJt+aZqHSwtLtPOcu+S2DYZybkgwI0lxY9C7PsXDK7RASA2VVvHwTGlij/rC2Qp76FeCAlsaNqcM1rFuKsfWMBoavZrU8db8lrWlvCyqaj2Nfa+e7qzxRXk56rJh5BKfssyp/4/M+2dUifVfN4mD1SyOg0hainFAy5DVBLcgsJJ0KyQ0S0qq/Z7Srlrcu+b/VAXjfKo2ljoxSRAXEPnw6jBp2TA4PNcxU0fkEk6oSHOSFjoAwRyIg+Fjpzc9N0IkjATWoXnX6ApXDj6jcBn/yCAt3Yls4XGZy99P9GejrSX1akKqjPf3EaI0bwzmXh1G9w/5hyyoQWy4Y=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/Memoirs-of-Marguerite-de-Valois-Queen-of-Navarre---Volume-1_3838
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
